@@ -1,0 +1,30 @@
+#!/bin/bash
+
+RUN_DIR=/var/vcap/sys/run/time_logger
+LOG_DIR=/var/vcap/sys/log/time_logger
+PIDFILE=${RUN_DIR}/pid
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    echo $$ > $PIDFILE
+
+    exec /var/vcap/packages/time_logger/bin/time_logger \
+      >>  $LOG_DIR/time_logger.stdout.log \
+      2>> $LOG_DIR/time_logger.stderr.log
+
+    ;;
+
+  stop)
+    kill -9 `cat $PIDFILE`
+    rm -f $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}" ;;
+
+esac
