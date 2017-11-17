@@ -1,0 +1,4 @@
+set -e -x
+
+tar xzf time_logger/time_logger.tar.gz
+cp time_logger ${BOSH_INSTALL_TARGET}
