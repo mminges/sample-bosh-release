@@ -4,6 +4,10 @@ name: time_logger
 templates: 
   ctl.erb: bin/ctl
 
-packages: []
+packages: 
+- time_logger
 
-properties: {}
+properties:
+  time_logger.period:
+    description: Frequency of logging
+    default: 30

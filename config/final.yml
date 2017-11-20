@@ -1,1 +1,6 @@
-name: sample-bosh
+---
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /tmp/time_logger
+final_name: time_logger
